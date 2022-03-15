@@ -6,11 +6,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 @AllArgsConstructor
-public class RegisterController {
+public class LoginController {
 
-    @GetMapping("/register")
-    public String getRegisterPage(){
-        return "register";
+    @GetMapping("/login")
+    public String getLoginPage(){
+        return "login";
     }
-
 }

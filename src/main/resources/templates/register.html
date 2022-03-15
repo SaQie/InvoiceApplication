@@ -1,10 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html
+        xmlns="http://www.w3.org/1999/html" lang="pl">
 <head>
     <meta charset="UTF-8">
     <title>Invoice</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
+    <link href="../static/styles/register.css" th:href="@{/styles/register.css}" rel="stylesheet">
 </head>
 <body>
-
+<div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-lg-8 col-xl-6">
+            <div class="card rounded-3">
+                <div class="card-body p-4 p-md-5">
+                    <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2 text-center fw-bold">Rejestracja</h3>
+                    <form class="px-md-2 form-floating" th:action="@{/register}" method="post">
+                        <div class="form-outline mb-4">
+                            <label class="form-label fw-bold" for="username">Nazwa użytkownika</label>
+                            <input type="text" id="username" class="form-control" />
+                        </div>
+                        <div class="form-outline mb-4">
+                            <label class="form-label fw-bold" for="form3Example1q">Adres e-mail</label>
+                            <input type="text" id="form3Example1q" class="form-control" />
+                        </div>
+                        <div class="form-outline mb-4">
+                            <label class="form-label fw-bold" for="password">Hasło</label>
+                            <input type="password" id="password" class="form-control" />
+                        </div>
+                        <div class="form-outline mb-4">
+                            <label class="form-label fw-bold" for="passwordRepeat">Powtórz hasło</label>
+                            <input type="password" id="passwordRepeat" class="form-control" />
+                        </div>
+                        <div class="row">
+                            <button type="submit" class="btn btn-success btn-lg mb-1 fw-bold">Potwierdz</button>
+                            <small class="text-muted text-center">Jeśli posiadasz już konto przejdz <a href="/login" style="text-decoration: none">tutaj</a> aby się zalogować. </small>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
