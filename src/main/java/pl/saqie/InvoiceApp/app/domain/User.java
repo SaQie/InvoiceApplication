@@ -30,11 +30,8 @@ public class User implements UserDetails {
 
     private LocalDate createdDate;
 
-    @OneToOne
-    private Company company;
-
     @OneToMany
-    private List<Invoice> invoices;
+    private List<Company> companies;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

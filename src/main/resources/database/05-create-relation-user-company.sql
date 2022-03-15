@@ -1,2 +1,2 @@
-alter table users add company_id INT UNIQUE,
-    add foreign key (company_id) REFERENCES company(id) ON UPDATE CASCADE
+alter table company add user_id INT,
+    add foreign key (user_id) REFERENCES users(id) ON UPDATE CASCADE

@@ -24,10 +24,7 @@ public class Invoice {
     @Enumerated(EnumType.STRING)
     private PaymentForm paymentForm;
 
-    @OneToOne
-    private Company seller;
-
-    @OneToOne
+    @ManyToOne
     private Company buyer;
 
     @OneToMany
