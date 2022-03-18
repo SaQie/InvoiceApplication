@@ -1,4 +1,4 @@
-package pl.saqie.InvoiceApp.app.security;
+package pl.saqie.InvoiceApp.app.components.user.usecase.login;
 
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,7 +9,7 @@ import pl.saqie.InvoiceApp.app.repository.UserRepository;
 
 @Service
 @AllArgsConstructor
-public class UserDetail implements UserDetailsService {
+public class UserLoginUseCase implements UserDetailsService {
 
     private final UserRepository userRepository;
 
