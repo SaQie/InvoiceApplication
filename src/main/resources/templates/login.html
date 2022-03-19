@@ -17,6 +17,16 @@
                 <div class="card-body p-4 p-md-5">
                     <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2 text-center fw-bold">Logowanie</h3>
                     <form class="px-md-2 form-floating" th:action="@{/login}" method="post">
+                        <div th:if="${param.error}">
+                            <ul>
+                                <li class="text-muted">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</li>
+                            </ul>
+                        </div>
+                        <div th:if="${param.logout}">
+                            <ul>
+                                <li class="text-muted">Pomyślnie wylogowano z konta.</li>
+                            </ul>
+                        </div>
                         <div class="form-outline mb-4">
                             <label class="form-label fw-bold" for="email">E-Mail</label>
                             <input type="email" id="email" name="email" class="form-control" />

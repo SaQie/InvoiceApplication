@@ -19,19 +19,19 @@
                     <form class="px-md-2 form-floating" th:action="@{/register}" method="post">
                         <div class="form-outline mb-4">
                             <label class="form-label fw-bold" for="username">Nazwa użytkownika</label>
-                            <input type="text" id="username" class="form-control" />
+                            <input type="text" id="username" class="form-control" th:field="${registerUserDto.username}" />
                         </div>
                         <div class="form-outline mb-4">
                             <label class="form-label fw-bold" for="form3Example1q">Adres e-mail</label>
-                            <input type="text" id="form3Example1q" class="form-control" />
+                            <input type="text" id="form3Example1q" class="form-control" th:field="${registerUserDto.email}" />
                         </div>
                         <div class="form-outline mb-4">
                             <label class="form-label fw-bold" for="password">Hasło</label>
-                            <input type="password" id="password" class="form-control" />
+                            <input type="password" id="password" class="form-control" th:field="${registerUserDto.password}" />
                         </div>
                         <div class="form-outline mb-4">
                             <label class="form-label fw-bold" for="passwordRepeat">Powtórz hasło</label>
-                            <input type="password" id="passwordRepeat" class="form-control" />
+                            <input type="password" id="passwordRepeat" class="form-control" th:field="${registerUserDto.passwordRepeat}"/>
                         </div>
                         <div class="row">
                             <button type="submit" class="btn btn-success btn-lg mb-1 fw-bold">Potwierdz</button>

@@ -2,14 +2,14 @@ package pl.saqie.InvoiceApp.app.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import pl.saqie.InvoiceApp.app.components.user.User;
+import pl.saqie.InvoiceApp.app.components.user.Client;
 
 import java.util.Optional;
 
 @Repository
 
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface ClientRepository extends JpaRepository<Client, Long> {
 
-    Optional<User> findByEmail(String email);
+    Optional<Client> findByEmail(String email);
 
 }

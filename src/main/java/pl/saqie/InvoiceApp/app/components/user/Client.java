@@ -5,21 +5,22 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import pl.saqie.InvoiceApp.app.domain.Company;
 
+
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Getter
-@Table(name = "users")
-public class User implements UserDetails {
+@Table(name = "client")
+public class Client implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,12 +33,24 @@ public class User implements UserDetails {
 
     private LocalDate createdDate;
 
+    @Enumerated(value = EnumType.STRING)
+    private Role role;
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setRole(Role role){
+        this.role = role;
+    }
     @OneToMany
     private List<Company> companies;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        List<SimpleGrantedAuthority> authorityList = new ArrayList<>();
+        authorityList.add(new SimpleGrantedAuthority(role.name()));
+        return authorityList;
     }
 
     @Override
