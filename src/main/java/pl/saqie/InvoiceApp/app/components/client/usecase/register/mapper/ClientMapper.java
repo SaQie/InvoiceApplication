@@ -1,7 +1,7 @@
-package pl.saqie.InvoiceApp.app.components.user.usecase.register.mapper;
+package pl.saqie.InvoiceApp.app.components.client.usecase.register.mapper;
 
-import pl.saqie.InvoiceApp.app.components.user.Client;
-import pl.saqie.InvoiceApp.app.components.user.usecase.register.dto.RegisterUserDto;
+import pl.saqie.InvoiceApp.app.components.client.Client;
+import pl.saqie.InvoiceApp.app.components.client.usecase.register.dto.RegisterUserDto;
 
 import java.time.LocalDate;
 

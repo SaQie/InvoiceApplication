@@ -1,11 +1,11 @@
-package pl.saqie.InvoiceApp.app.components.user.usecase.register;
+package pl.saqie.InvoiceApp.app.components.client.usecase.register;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.saqie.InvoiceApp.app.components.user.Client;
-import pl.saqie.InvoiceApp.app.components.user.Role;
-import pl.saqie.InvoiceApp.app.components.user.usecase.register.dto.RegisterUserDto;
-import pl.saqie.InvoiceApp.app.components.user.usecase.register.mapper.ClientMapper;
+import pl.saqie.InvoiceApp.app.components.client.Client;
+import pl.saqie.InvoiceApp.app.components.client.Role;
+import pl.saqie.InvoiceApp.app.components.client.usecase.register.dto.RegisterUserDto;
+import pl.saqie.InvoiceApp.app.components.client.usecase.register.mapper.ClientMapper;
 import pl.saqie.InvoiceApp.app.repository.ClientRepository;
 import pl.saqie.InvoiceApp.app.security.PasswordEncoder;
 

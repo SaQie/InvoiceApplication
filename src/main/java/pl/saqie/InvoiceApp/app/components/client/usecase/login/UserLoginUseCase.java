@@ -1,4 +1,4 @@
-package pl.saqie.InvoiceApp.app.components.user.usecase.login;
+package pl.saqie.InvoiceApp.app.components.client.usecase.login;
 
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

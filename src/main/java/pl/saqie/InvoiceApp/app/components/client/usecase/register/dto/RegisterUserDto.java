@@ -1,4 +1,4 @@
-package pl.saqie.InvoiceApp.app.components.user.usecase.register.dto;
+package pl.saqie.InvoiceApp.app.components.client.usecase.register.dto;
 
 import lombok.*;
 

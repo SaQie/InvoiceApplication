@@ -1,4 +1,4 @@
-package pl.saqie.InvoiceApp.app.components.user;
+package pl.saqie.InvoiceApp.app.components.client;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
