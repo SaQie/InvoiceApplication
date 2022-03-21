@@ -35,8 +35,7 @@ public class RegisterController {
     public String processRegisterNewUser(@ModelAttribute @Valid RegisterClientDto registerClientDto, BindingResult bindingResult, Model model) throws ClientExistsException, MissmatchPasswordException {
         if (!bindingResult.hasErrors()){
             registerUseCase.registerNewUser(registerClientDto);
-            model.addAttribute("registeredSuccessfully", "Pomyślnie zarejestrowano nowego użytkownika");
-            return "add-company";
+            model.addAttribute("registeredSuccessfully", "Zostales pomyslnie zarejestrowany.");
         }
         return "register";
     }

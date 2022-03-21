@@ -20,6 +20,8 @@ public class Company {
     private String name;
     private String adress;
     private String nip;
+    private String regon;
+    private String phoneNumber;
 
     @OneToMany
     private List<Invoice> invoices;

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 @AllArgsConstructor
 public class HomeController {
 
-    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/home")
     public String getAnonymousHomePage(){
         return "home";

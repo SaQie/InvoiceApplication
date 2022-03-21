@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 public class RegisterClientDto {
 
-    @Size(min = 5, max = 15, message = "Nazwa musi skladac sie od 5 do 15 znakow.")
+    @Size(min = 3, max = 15, message = "Nazwa musi skladac sie od 3 do 15 znakow.")
     private String username;
     @Email(message = "Wprowadz poprawny adres email")
     @NotEmpty(message = "Email nie moze pozostac pusty.")
