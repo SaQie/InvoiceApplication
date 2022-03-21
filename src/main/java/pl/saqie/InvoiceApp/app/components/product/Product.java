@@ -1,8 +1,9 @@
-package pl.saqie.InvoiceApp.app.domain;
+package pl.saqie.InvoiceApp.app.components.product;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import pl.saqie.InvoiceApp.app.domain.VatValue;
 
 import javax.persistence.*;
 import java.math.BigDecimal;

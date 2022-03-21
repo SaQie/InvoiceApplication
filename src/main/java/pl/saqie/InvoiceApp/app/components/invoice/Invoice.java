@@ -1,8 +1,11 @@
-package pl.saqie.InvoiceApp.app.domain;
+package pl.saqie.InvoiceApp.app.components.invoice;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import pl.saqie.InvoiceApp.app.components.company.Company;
+import pl.saqie.InvoiceApp.app.domain.PaymentForm;
+import pl.saqie.InvoiceApp.app.components.product.Product;
 
 import javax.persistence.*;
 import java.time.LocalDate;

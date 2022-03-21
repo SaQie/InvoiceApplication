@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import pl.saqie.InvoiceApp.app.domain.Company;
+import pl.saqie.InvoiceApp.app.components.company.Company;
 
 
 import javax.persistence.*;

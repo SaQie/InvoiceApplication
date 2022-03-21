@@ -1,8 +1,9 @@
-package pl.saqie.InvoiceApp.app.domain;
+package pl.saqie.InvoiceApp.app.components.company;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import pl.saqie.InvoiceApp.app.components.invoice.Invoice;
 
 import javax.persistence.*;
 import java.util.List;
