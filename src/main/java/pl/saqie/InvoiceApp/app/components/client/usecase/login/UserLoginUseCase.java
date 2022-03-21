@@ -5,7 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import pl.saqie.InvoiceApp.app.repository.ClientRepository;
+import pl.saqie.InvoiceApp.app.components.client.usecase.register.ClientRepository;
 
 @Service
 @AllArgsConstructor
