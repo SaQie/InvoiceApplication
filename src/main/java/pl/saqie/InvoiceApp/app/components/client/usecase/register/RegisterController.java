@@ -14,6 +14,8 @@ import pl.saqie.InvoiceApp.app.components.client.usecase.register.ClientRegister
 import pl.saqie.InvoiceApp.app.components.client.usecase.register.dto.RegisterClientDto;
 import pl.saqie.InvoiceApp.app.components.client.usecase.register.validator.exception.ClientExistsException;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
@@ -32,9 +34,10 @@ public class RegisterController {
     }
 
     @PostMapping("/register")
-    public String processRegisterNewUser(@ModelAttribute @Valid RegisterClientDto registerClientDto, BindingResult bindingResult, Model model) throws ClientExistsException, MissmatchPasswordException {
+    public String processRegisterNewUser(@ModelAttribute @Valid RegisterClientDto registerClientDto, BindingResult bindingResult, Model model, HttpServletRequest request) throws ClientExistsException, MissmatchPasswordException, ServletException {
         if (!bindingResult.hasErrors()){
             registerUseCase.registerNewUser(registerClientDto);
+            request.login(registerClientDto.getEmail(), registerClientDto.getPassword());
             model.addAttribute("registeredSuccessfully", "Zostales pomyslnie zarejestrowany.");
         }
         return "register";
