@@ -14,7 +14,7 @@ public class ClientMapper {
                 .createdDate(LocalDate.now())
                 .email(registerUserDto.getEmail())
                 .password(registerUserDto.getPassword())
-                .role(Role.PENDINGCLIENT)
+                .role(Role.PENDING_CLIENT)
                 .build();
     }
 

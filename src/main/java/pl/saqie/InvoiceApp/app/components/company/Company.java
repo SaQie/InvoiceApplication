@@ -1,8 +1,7 @@
 package pl.saqie.InvoiceApp.app.components.company;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import pl.saqie.InvoiceApp.app.components.client.Client;
 import pl.saqie.InvoiceApp.app.components.invoice.Invoice;
 
 import javax.persistence.*;
@@ -11,6 +10,8 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 @Builder
 public class Company {
 
@@ -23,8 +24,13 @@ public class Company {
     private String nip;
     private String regon;
     private String phoneNumber;
+    private String ownerName;
+    private String ownerLastName;
 
     @OneToMany
     private List<Invoice> invoices;
+
+    @ManyToOne
+    private Client client;
 
 }

@@ -43,6 +43,7 @@ public class Client implements UserDetails {
     public void setRole(Role role){
         this.role = role;
     }
+
     @OneToMany
     private List<Company> companies;
 
