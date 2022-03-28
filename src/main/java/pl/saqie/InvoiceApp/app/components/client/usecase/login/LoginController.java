@@ -1,4 +1,4 @@
-package pl.saqie.InvoiceApp.app;
+package pl.saqie.InvoiceApp.app.components.client.usecase.login;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;

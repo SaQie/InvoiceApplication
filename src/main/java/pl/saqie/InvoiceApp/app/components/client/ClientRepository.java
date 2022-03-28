@@ -1,8 +1,7 @@
-package pl.saqie.InvoiceApp.app.components.client.usecase.register;
+package pl.saqie.InvoiceApp.app.components.client;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import pl.saqie.InvoiceApp.app.components.client.Client;
 
 import java.util.Optional;
 

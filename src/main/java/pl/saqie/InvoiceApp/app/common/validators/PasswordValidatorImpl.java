@@ -1,6 +1,7 @@
-package pl.saqie.InvoiceApp.app.common;
+package pl.saqie.InvoiceApp.app.common.validators;
 
 import org.springframework.stereotype.Service;
+import pl.saqie.InvoiceApp.app.common.MissmatchPasswordException;
 
 import java.util.Objects;
 
