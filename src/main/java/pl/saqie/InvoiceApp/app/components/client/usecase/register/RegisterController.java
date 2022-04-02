@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.saqie.InvoiceApp.app.common.MissmatchPasswordException;
 import pl.saqie.InvoiceApp.app.components.client.Client;
-import pl.saqie.InvoiceApp.app.components.client.usecase.register.ClientRegisterUseCase;
 import pl.saqie.InvoiceApp.app.components.client.usecase.register.dto.RegisterClientDto;
 import pl.saqie.InvoiceApp.app.components.client.usecase.register.validator.exception.ClientExistsException;
 
@@ -34,9 +33,9 @@ public class RegisterController {
     }
 
     @PostMapping("/register")
-    public String processRegisterNewUser(@ModelAttribute @Valid RegisterClientDto registerClientDto, BindingResult bindingResult, Model model, HttpServletRequest request) throws ClientExistsException, MissmatchPasswordException, ServletException {
+    public String processRegisterNewUser(@ModelAttribute @Valid RegisterClientDto registerClientDto, BindingResult bindingResult, Model model, HttpServletRequest request) throws ServletException {
         if (!bindingResult.hasErrors()){
-            registerUseCase.registerNewUser(registerClientDto);
+            registerUseCase.registerNewClient(registerClientDto);
             request.login(registerClientDto.getEmail(), registerClientDto.getPassword());
             model.addAttribute("registeredSuccessfully", "Zostales pomyslnie zarejestrowany.");
         }

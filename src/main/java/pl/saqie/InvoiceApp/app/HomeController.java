@@ -35,4 +35,11 @@ public class HomeController {
         return "redirect:/accessdenied";
     }
 
+    @PreAuthorize("hasAuthority('CLIENT')")
+    @GetMapping("/company/panel")
+    public String getCompanyPanel(){
+        return "company-panel";
+    }
+
+
 }

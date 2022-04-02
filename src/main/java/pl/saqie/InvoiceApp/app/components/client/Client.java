@@ -9,10 +9,11 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import pl.saqie.InvoiceApp.app.components.company.Company;
 
-
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -32,6 +33,7 @@ public class Client implements UserDetails {
     private String password;
 
     private LocalDate createdDate;
+    private int numberOfCompanies;
 
     @Enumerated(value = EnumType.STRING)
     private Role role;
@@ -40,12 +42,24 @@ public class Client implements UserDetails {
         this.password = password;
     }
 
-    public void setRole(Role role){
+    public void setRole(Role role) {
         this.role = role;
     }
 
-    @OneToMany
+    public void setNumberOfCompanies(int numberOfCompanies) {
+        this.numberOfCompanies = numberOfCompanies;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "client", fetch = FetchType.EAGER)
     private List<Company> companies;
+
+    public void addCompany(Company company) {
+        if (companies == null) {
+            companies = new ArrayList<>();
+        }
+        companies.add(company);
+        company.setClient(this);
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

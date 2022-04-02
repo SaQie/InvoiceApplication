@@ -1,0 +1,2 @@
+INSERT INTO client(username, email, password, role, created_date, number_of_companies)VALUES
+        ('Kamcio','Kamcio99@o2.pl', '$2a$12$CrQlPK4jWVal92YBTwwEGe6nL9zysI0OQrF7VU6/Yw/fmkOq8bTQ6', 'PENDINGCLIENT', '2022-03-30', 1);

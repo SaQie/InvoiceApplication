@@ -1,9 +1,17 @@
 package pl.saqie.InvoiceApp.app.common.validators;
 
+import org.springframework.stereotype.Service;
 import pl.saqie.InvoiceApp.app.common.MissmatchPasswordException;
+import pl.saqie.InvoiceApp.app.components.client.usecase.register.dto.RegisterClientDto;
 
-public interface PasswordValidator{
+import java.util.Objects;
 
-    void repeatPasswordValid(String password, String passwordRepeat) throws MissmatchPasswordException;
+@Service
+public class PasswordValidator{
 
+    public void valid(RegisterClientDto registerClientDto) throws MissmatchPasswordException {
+        if (!Objects.equals(registerClientDto.getPassword(),registerClientDto.getPasswordRepeat())){
+            throw new MissmatchPasswordException("Hasla nie sa zgodne.");
+        }
+    }
 }

@@ -8,12 +8,12 @@ import pl.saqie.InvoiceApp.app.components.client.ClientRepository;
 
 @Service
 @AllArgsConstructor
-public class ClientUsernameExists implements RegisterValidator{
+public class ClientUsernameExists implements RegisterValidator {
 
     private final ClientRepository clientRepository;
 
     @Override
-    public void validate(RegisterClientDto registerUserDto) throws ClientExistsException {
+    public void validate(RegisterClientDto registerUserDto){
         if (clientRepository.existsByUsername(registerUserDto.getUsername())){
             throw new ClientExistsException("Klient z nazwa " + registerUserDto.getUsername() + " juz istnieje.");
         }

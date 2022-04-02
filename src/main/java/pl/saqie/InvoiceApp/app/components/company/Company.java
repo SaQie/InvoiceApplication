@@ -13,6 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
+@Table(name = "company")
 public class Company {
 
     @Id
@@ -31,6 +32,7 @@ public class Company {
     private List<Invoice> invoices;
 
     @ManyToOne
+    @JoinColumn(name = "client_id")
     private Client client;
 
 }
