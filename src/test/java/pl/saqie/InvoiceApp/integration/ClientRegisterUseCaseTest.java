@@ -33,9 +33,7 @@ class ClientRegisterUseCaseTest {
     @BeforeEach
     void prepareDatabase(){
         clearDatabase();
-        ResourceDatabasePopulator resourceDatabasePopulator = new ResourceDatabasePopulator
-                (false,false,"UTF-8", new ClassPathResource("data.sql"));
-        resourceDatabasePopulator.execute(dataSource);
+
     }
 
     void clearDatabase(){
@@ -62,17 +60,21 @@ class ClientRegisterUseCaseTest {
     }
 
     @Test
-    void shouldReturnAutoIncrementId(){
+    void shouldReturnClientWithTheSameGivenFields(){
         // given
         RegisterClientDto registerClientDto = RegisterClientDto.builder()
-                .username("username")
+                .username("name")
                 .password("password")
                 .passwordRepeat("password")
                 .email("example@example.com").build();
         // when
         Client client = userService.registerNewClient(registerClientDto);
         // then
-        assertNotNull(client.getId());
+        assertAll(
+                () -> assertNotNull(client),
+                () -> assertEquals("name", client.getUsername()),
+                () -> assertEquals("example@example.com", client.getEmail())
+        );
     }
 
 }

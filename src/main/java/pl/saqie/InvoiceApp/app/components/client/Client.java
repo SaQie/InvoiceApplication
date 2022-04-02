@@ -50,17 +50,6 @@ public class Client implements UserDetails {
         this.numberOfCompanies = numberOfCompanies;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "client", fetch = FetchType.EAGER)
-    private List<Company> companies;
-
-    public void addCompany(Company company) {
-        if (companies == null) {
-            companies = new ArrayList<>();
-        }
-        companies.add(company);
-        company.setClient(this);
-    }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> authorityList = new ArrayList<>();
@@ -75,7 +64,7 @@ public class Client implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return username;
     }
 
     @Override

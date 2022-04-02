@@ -8,10 +8,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import pl.saqie.InvoiceApp.app.common.MissmatchPasswordException;
 import pl.saqie.InvoiceApp.app.components.client.Client;
 import pl.saqie.InvoiceApp.app.components.client.usecase.register.dto.RegisterClientDto;
-import pl.saqie.InvoiceApp.app.components.client.usecase.register.validator.exception.ClientExistsException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -36,7 +34,7 @@ public class RegisterController {
     public String processRegisterNewUser(@ModelAttribute @Valid RegisterClientDto registerClientDto, BindingResult bindingResult, Model model, HttpServletRequest request) throws ServletException {
         if (!bindingResult.hasErrors()){
             registerUseCase.registerNewClient(registerClientDto);
-            request.login(registerClientDto.getEmail(), registerClientDto.getPassword());
+            request.login(registerClientDto.getUsername(), registerClientDto.getPasswordRepeat());
             model.addAttribute("registeredSuccessfully", "Zostales pomyslnie zarejestrowany.");
         }
         return "register";

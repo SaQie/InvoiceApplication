@@ -31,7 +31,7 @@ public class Company {
     @OneToMany
     private List<Invoice> invoices;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "client_id")
     private Client client;
 
