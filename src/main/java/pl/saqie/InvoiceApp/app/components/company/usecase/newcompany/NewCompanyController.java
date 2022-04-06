@@ -4,15 +4,12 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import pl.saqie.InvoiceApp.app.components.client.Client;
-import pl.saqie.InvoiceApp.app.components.company.usecase.newcompany.NewCompanyDto;
-import pl.saqie.InvoiceApp.app.components.company.usecase.newcompany.NewCompanyUseCase;
+import pl.saqie.InvoiceApp.app.components.client.entity.Client;
 import pl.saqie.InvoiceApp.app.components.company.usecase.newcompany.validator.exception.PhoneNumberValidationException;
 
 import javax.validation.Valid;

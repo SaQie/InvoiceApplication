@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
-import pl.saqie.InvoiceApp.app.components.client.Client;
+import pl.saqie.InvoiceApp.app.components.client.entity.Client;
 import pl.saqie.InvoiceApp.app.components.client.usecase.register.ClientRegisterUseCase;
 import pl.saqie.InvoiceApp.app.components.client.usecase.register.dto.RegisterClientDto;
 

@@ -3,7 +3,6 @@ package pl.saqie.InvoiceApp.app.components.client.usecase.register.validator.exc
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import pl.saqie.InvoiceApp.app.common.MissmatchPasswordException;
 import pl.saqie.InvoiceApp.app.components.client.usecase.register.dto.RegisterClientDto;
 
 @ControllerAdvice

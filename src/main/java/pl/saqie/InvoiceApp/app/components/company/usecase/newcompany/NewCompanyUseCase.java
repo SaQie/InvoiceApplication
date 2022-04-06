@@ -2,11 +2,10 @@ package pl.saqie.InvoiceApp.app.components.company.usecase.newcompany;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import pl.saqie.InvoiceApp.app.components.client.Client;
+import pl.saqie.InvoiceApp.app.components.client.entity.Client;
 import pl.saqie.InvoiceApp.app.components.client.ClientRepository;
-import pl.saqie.InvoiceApp.app.components.client.Role;
+import pl.saqie.InvoiceApp.app.components.client.entity.Role;
 import pl.saqie.InvoiceApp.app.components.company.Company;
 import pl.saqie.InvoiceApp.app.components.company.usecase.newcompany.mapper.CompanyMapper;
 import pl.saqie.InvoiceApp.app.components.company.usecase.newcompany.validator.CorrectPhoneNumberValidator;

@@ -1,10 +1,11 @@
-package pl.saqie.InvoiceApp.app.components.client.usecase.register;
+package pl.saqie.InvoiceApp.app.common;
 
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import pl.saqie.InvoiceApp.app.security.PasswordEncoder;
 
-@Service
+@Component
 @AllArgsConstructor
 public class PasswordHasher {
 

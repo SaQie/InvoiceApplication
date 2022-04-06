@@ -1,8 +1,8 @@
 package pl.saqie.InvoiceApp.app.components.client;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import pl.saqie.InvoiceApp.app.components.client.entity.Client;
 
 import java.util.Optional;
 

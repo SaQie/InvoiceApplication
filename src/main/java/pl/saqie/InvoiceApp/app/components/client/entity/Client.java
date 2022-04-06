@@ -1,4 +1,4 @@
-package pl.saqie.InvoiceApp.app.components.client;
+package pl.saqie.InvoiceApp.app.components.client.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import pl.saqie.InvoiceApp.app.components.company.Company;
 
 import javax.persistence.*;
 import java.time.LocalDate;

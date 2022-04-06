@@ -1,4 +1,4 @@
-package pl.saqie.InvoiceApp.app.components.client.usecase.register;
+package pl.saqie.InvoiceApp.app.components.client;
 
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -8,7 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import pl.saqie.InvoiceApp.app.components.client.Client;
+import pl.saqie.InvoiceApp.app.components.client.entity.Client;
 import pl.saqie.InvoiceApp.app.components.client.usecase.register.dto.RegisterClientDto;
 
 import javax.servlet.ServletException;
@@ -17,9 +17,14 @@ import javax.validation.Valid;
 
 @Controller
 @AllArgsConstructor
-public class RegisterController {
+public class AuthController {
 
-    private final ClientRegisterUseCase registerUseCase;
+    private final ClientService clientService;
+
+    @GetMapping("/login")
+    public String getLoginPage(){
+        return "login";
+    }
 
     @GetMapping("/register")
     public String getRegisterPage(@AuthenticationPrincipal Client client, Model model){
@@ -31,13 +36,14 @@ public class RegisterController {
     }
 
     @PostMapping("/register")
-    public String processRegisterNewUser(@ModelAttribute @Valid RegisterClientDto registerClientDto, BindingResult bindingResult, Model model, HttpServletRequest request) throws ServletException {
+    public String processRegisterNewUser(@ModelAttribute @Valid RegisterClientDto clientDto, BindingResult bindingResult, Model model, HttpServletRequest request) throws ServletException {
         if (!bindingResult.hasErrors()){
-            registerUseCase.registerNewClient(registerClientDto);
-            request.login(registerClientDto.getUsername(), registerClientDto.getPasswordRepeat());
+            clientService.register(clientDto);
+            request.login(clientDto.getUsername(), clientDto.getPasswordRepeat());
             model.addAttribute("registeredSuccessfully", "Zostales pomyslnie zarejestrowany.");
         }
         return "register";
     }
+
 
 }

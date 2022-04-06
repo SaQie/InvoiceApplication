@@ -1,4 +1,4 @@
-package pl.saqie.InvoiceApp.app.components.client;
+package pl.saqie.InvoiceApp.app.components.client.entity;
 
 public enum Role {
 

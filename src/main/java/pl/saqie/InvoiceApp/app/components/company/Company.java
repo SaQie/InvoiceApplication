@@ -1,7 +1,7 @@
 package pl.saqie.InvoiceApp.app.components.company;
 
 import lombok.*;
-import pl.saqie.InvoiceApp.app.components.client.Client;
+import pl.saqie.InvoiceApp.app.components.client.entity.Client;
 import pl.saqie.InvoiceApp.app.components.invoice.Invoice;
 
 import javax.persistence.*;
