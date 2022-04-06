@@ -3,7 +3,7 @@ package pl.saqie.InvoiceApp.app.components.company.usecase.newcompany.validator.
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import pl.saqie.InvoiceApp.app.components.company.usecase.newcompany.NewCompanyDto;
+import pl.saqie.InvoiceApp.app.components.company.usecase.newcompany.dto.NewCompanyDto;
 
 @ControllerAdvice
 public class CompanyExceptionHandler {

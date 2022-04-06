@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import pl.saqie.InvoiceApp.app.components.company.usecase.newcompany.validator.exception.PhoneNumberValidationException;
 
 @Service
-public class CorrectPhoneNumberValidatorImpl implements CorrectPhoneNumberValidator{
+public class PhoneNumberValidatorImpl implements PhoneNumberValidator {
 
     @Override
     public void chceckPhoneNumberIsValid(String phoneNumber) throws PhoneNumberValidationException {

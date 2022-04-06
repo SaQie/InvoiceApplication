@@ -1,4 +1,4 @@
-package pl.saqie.InvoiceApp.app.components.company.usecase.newcompany;
+package pl.saqie.InvoiceApp.app.components.company;
 
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.saqie.InvoiceApp.app.components.client.entity.Client;
+import pl.saqie.InvoiceApp.app.components.company.usecase.newcompany.dto.NewCompanyDto;
 import pl.saqie.InvoiceApp.app.components.company.usecase.newcompany.validator.exception.PhoneNumberValidationException;
 
 import javax.validation.Valid;
@@ -18,7 +19,7 @@ import javax.validation.Valid;
 @AllArgsConstructor
 public class NewCompanyController {
 
-    private final NewCompanyUseCase newCompanyUseCase;
+    private final CompanyService companyService;
 
     @PreAuthorize("hasAnyAuthority('CLIENT','PENDING_CLIENT')")
     @GetMapping("/add/company")
@@ -29,9 +30,9 @@ public class NewCompanyController {
 
     @PreAuthorize("hasAnyAuthority('CLIENT','PENDING_CLIENT')")
     @PostMapping("/add/company")
-    public String postNewCompanyForm(@ModelAttribute @Valid NewCompanyDto newCompanyDto, BindingResult bindingResult, @AuthenticationPrincipal Client client, Model model) throws PhoneNumberValidationException {
+    public String postNewCompanyForm(@ModelAttribute @Valid NewCompanyDto companyDto, BindingResult bindingResult, @AuthenticationPrincipal Client client, Model model) throws PhoneNumberValidationException {
         if (!bindingResult.hasErrors()){
-            newCompanyUseCase.addNewCompanyToClient(newCompanyDto, client);
+            companyService.createNewCompany(companyDto, client);
             model.addAttribute("addedSuccessfully", "Pomyslnie dodano nowa firme do konta.");
         }
         return "add-company";

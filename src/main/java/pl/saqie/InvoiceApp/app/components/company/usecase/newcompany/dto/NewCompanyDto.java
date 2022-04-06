@@ -1,4 +1,4 @@
-package pl.saqie.InvoiceApp.app.components.company.usecase.newcompany;
+package pl.saqie.InvoiceApp.app.components.company.usecase.newcompany.dto;
 
 import lombok.*;
 import org.hibernate.validator.constraints.pl.NIP;

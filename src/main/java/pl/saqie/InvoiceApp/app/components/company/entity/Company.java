@@ -1,4 +1,4 @@
-package pl.saqie.InvoiceApp.app.components.company;
+package pl.saqie.InvoiceApp.app.components.company.entity;
 
 import lombok.*;
 import pl.saqie.InvoiceApp.app.components.client.entity.Client;

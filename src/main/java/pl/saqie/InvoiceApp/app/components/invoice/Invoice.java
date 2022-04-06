@@ -3,7 +3,7 @@ package pl.saqie.InvoiceApp.app.components.invoice;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
-import pl.saqie.InvoiceApp.app.components.company.Company;
+import pl.saqie.InvoiceApp.app.components.company.entity.Company;
 import pl.saqie.InvoiceApp.app.domain.PaymentForm;
 import pl.saqie.InvoiceApp.app.components.product.Product;
 
