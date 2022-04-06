@@ -27,10 +27,10 @@ public class ClientAuthUseCase implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("Client with name " + username + " not found."));
     }
 
-    public void registerClient(RegisterClientDto clientDto){
+    public Client registerClient(RegisterClientDto clientDto){
         validateClientFields(clientDto);
         Client client = mapFromDtoToEntity(clientDto);
-        saveClient(client);
+        return saveClient(client);
     }
 
     private void validateClientFields(RegisterClientDto clientDto) {
@@ -43,8 +43,8 @@ public class ClientAuthUseCase implements UserDetailsService {
         return mapper.mapDtoToEntity(clientDto);
     }
 
-    private void saveClient(Client client) {
-        clientRepository.save(client);
+    private Client saveClient(Client client) {
+        return clientRepository.save(client);
     }
 
 
