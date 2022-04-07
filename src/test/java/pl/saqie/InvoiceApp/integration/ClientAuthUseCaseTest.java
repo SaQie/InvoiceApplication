@@ -63,7 +63,6 @@ class ClientAuthUseCaseTest {
     }
 
     @Test
-    @DisplayName("Should return client instance after register")
     void shouldReturnNewClientInstance() {
         // given
         RegisterClientDto registerClientDto = initializeRegisterClientDto();
