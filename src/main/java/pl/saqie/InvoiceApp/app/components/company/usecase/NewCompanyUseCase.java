@@ -23,7 +23,7 @@ public class NewCompanyUseCase {
     private final ClientRepository clientRepository;
     private final CompanyMapper companyMapper;
 
-    public Company createNewCompany(NewCompanyDto newCompanyDto, Client client) throws PhoneNumberValidationException {
+    public Company createNewCompany(NewCompanyDto newCompanyDto, Client client) {
         validCompanyFields(newCompanyDto);
         Company company = assignClientToCompany(mapFromDtoToEntity(newCompanyDto), client);
         return saveCompany(company);
