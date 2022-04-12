@@ -5,7 +5,7 @@ import pl.saqie.InvoiceApp.app.components.client.entity.Client;
 import pl.saqie.InvoiceApp.app.components.invoice.Invoice;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @AllArgsConstructor
@@ -29,7 +29,7 @@ public class Company {
     private String ownerLastName;
 
     @OneToMany
-    private List<Invoice> invoices;
+    private Set<Invoice> invoices;
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "client_id")

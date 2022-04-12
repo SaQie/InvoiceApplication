@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.saqie.InvoiceApp.app.components.client.entity.Client;
 import pl.saqie.InvoiceApp.app.components.company.usecase.newcompany.dto.NewCompanyDto;
-import pl.saqie.InvoiceApp.app.components.company.usecase.newcompany.validator.exception.PhoneNumberValidationException;
 
 import javax.validation.Valid;
 
@@ -30,7 +29,7 @@ public class NewCompanyController {
 
     @PreAuthorize("hasAnyAuthority('CLIENT','PENDING_CLIENT')")
     @PostMapping("/add/company")
-    public String postNewCompanyForm(@ModelAttribute @Valid NewCompanyDto companyDto, BindingResult bindingResult, @AuthenticationPrincipal Client client, Model model) throws PhoneNumberValidationException {
+    public String postNewCompanyForm(@ModelAttribute @Valid NewCompanyDto companyDto, BindingResult bindingResult, @AuthenticationPrincipal Client client, Model model){
         if (!bindingResult.hasErrors()){
             companyService.createNewCompany(companyDto, client);
             model.addAttribute("addedSuccessfully", "Pomyslnie dodano nowa firme do konta.");

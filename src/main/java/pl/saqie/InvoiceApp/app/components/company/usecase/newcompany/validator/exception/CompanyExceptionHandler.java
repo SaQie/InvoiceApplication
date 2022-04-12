@@ -8,7 +8,7 @@ import pl.saqie.InvoiceApp.app.components.company.usecase.newcompany.dto.NewComp
 @ControllerAdvice
 public class CompanyExceptionHandler {
 
-    @ExceptionHandler(PhoneNumberValidationException.class)
+    @ExceptionHandler(CompanyValidationException.class)
     public String handleNewCompanyExceptions(Model model, Exception exception){
         model.addAttribute("error", exception.getMessage());
         model.addAttribute(new NewCompanyDto());

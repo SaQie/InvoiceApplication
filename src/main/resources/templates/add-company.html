@@ -17,6 +17,7 @@
                 <div class="card-body p-4 p-md-5" th:if="${addedSuccessfully == null}">
                     <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2 text-center fw-bold">Dodaj nową firmę</h3>
                     <form class="px-md-2 form-floating" th:action="@{/add/company}" method="post">
+                        <div class="mt-3 mb-3" style="color: darkred" th:if="${error != null}" th:text="${error}"></div>
                         <div class="form-outline mb-4">
                             <label class="form-label fw-bold" for="name">Nazwa firmy</label>
                             <input type="text" id="name" class="form-control" th:field="${newCompanyDto.name}"/>

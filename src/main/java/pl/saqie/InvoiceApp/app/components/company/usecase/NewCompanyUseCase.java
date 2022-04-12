@@ -7,18 +7,19 @@ import pl.saqie.InvoiceApp.app.components.client.ClientRepository;
 import pl.saqie.InvoiceApp.app.components.client.entity.Client;
 import pl.saqie.InvoiceApp.app.components.client.entity.Role;
 import pl.saqie.InvoiceApp.app.components.company.CompanyRepository;
-import pl.saqie.InvoiceApp.app.components.company.usecase.newcompany.dto.NewCompanyDto;
 import pl.saqie.InvoiceApp.app.components.company.entity.Company;
 import pl.saqie.InvoiceApp.app.components.company.mapper.CompanyMapper;
-import pl.saqie.InvoiceApp.app.components.company.usecase.newcompany.validator.PhoneNumberValidator;
-import pl.saqie.InvoiceApp.app.components.company.usecase.newcompany.validator.exception.PhoneNumberValidationException;
+import pl.saqie.InvoiceApp.app.components.company.usecase.newcompany.dto.NewCompanyDto;
+import pl.saqie.InvoiceApp.app.components.company.usecase.newcompany.validator.NewCompanyValidator;
+
+import java.util.List;
 
 @Service
 @Transactional
 @AllArgsConstructor
 public class NewCompanyUseCase {
 
-    private final PhoneNumberValidator validator;
+    private final List<NewCompanyValidator> validator;
     private final CompanyRepository companyRepository;
     private final ClientRepository clientRepository;
     private final CompanyMapper companyMapper;
@@ -30,7 +31,9 @@ public class NewCompanyUseCase {
     }
 
     private void validCompanyFields(NewCompanyDto newCompanyDto) {
-        validator.chceckPhoneNumberIsValid(newCompanyDto.getTelephoneNumber());
+        for (NewCompanyValidator newCompanyValidator : validator) {
+            newCompanyValidator.check(newCompanyDto);
+        }
     }
 
     private Company mapFromDtoToEntity(NewCompanyDto newCompanyDto) {

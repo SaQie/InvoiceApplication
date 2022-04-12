@@ -8,12 +8,11 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import pl.saqie.InvoiceApp.app.components.client.ClientRepository;
-import pl.saqie.InvoiceApp.app.components.client.ClientService;
 import pl.saqie.InvoiceApp.app.components.client.entity.Client;
 import pl.saqie.InvoiceApp.app.components.company.CompanyService;
 import pl.saqie.InvoiceApp.app.components.company.entity.Company;
 import pl.saqie.InvoiceApp.app.components.company.usecase.newcompany.dto.NewCompanyDto;
-import pl.saqie.InvoiceApp.app.components.company.usecase.newcompany.validator.exception.PhoneNumberValidationException;
+import pl.saqie.InvoiceApp.app.components.company.usecase.newcompany.validator.exception.CompanyValidationException;
 
 import javax.sql.DataSource;
 
@@ -100,14 +99,14 @@ class NewCompanyUseCaseTest {
         NewCompanyDto newCompanyDto = initializeNewCompanyDto();
         Client client = clientRepository.findById(1L).orElse(null);
         // when
-        Company newCompany = companyService.createNewCompany(newCompanyDto, client);
+        companyService.createNewCompany(newCompanyDto, client);
         // then
         assertNotNull(client);
         assertEquals(1,client.getNumberOfCompanies());
     }
 
     @Test
-    void shouldThrowsPhoneNumberValidationExceptionWhenTelephoneNumberIsIncorrect(){
+    void shouldThrowsCompanyValidationExceptionWhenTelephoneNumberIsIncorrect(){
         // given
         NewCompanyDto newCompanyDto = initializeNewCompanyDto();
         Client client = clientRepository.findById(1L).orElse(null);
@@ -115,7 +114,55 @@ class NewCompanyUseCaseTest {
         // when
 
         // then
-        assertThrows(PhoneNumberValidationException.class, () -> companyService.createNewCompany(newCompanyDto,client));
+        assertThrows(CompanyValidationException.class, () -> companyService.createNewCompany(newCompanyDto,client));
+    }
+
+    @Test
+    void shouldThrowsCompanyValidationExceptionWhenCompanyNameAlreadyExists(){
+        // given
+        NewCompanyDto newCompanyDto = initializeNewCompanyDto();
+        Client client = clientRepository.findById(1L).orElse(null);
+        newCompanyDto.setName("Oponeo S.A");
+        // when
+
+        // then
+        assertThrows(CompanyValidationException.class, () -> companyService.createNewCompany(newCompanyDto,client));
+    }
+
+    @Test
+    void shouldThrowsCompanyValidationExceptionWhenCompanyAdressAlreadyExists(){
+        // given
+        NewCompanyDto newCompanyDto = initializeNewCompanyDto();
+        Client client = clientRepository.findById(1L).orElse(null);
+        newCompanyDto.setAdress("Powstancow 2/4");
+        // when
+
+        // then
+        assertThrows(CompanyValidationException.class, () -> companyService.createNewCompany(newCompanyDto,client));
+    }
+
+    @Test
+    void shouldThrowsCompanyValidationExceptionWhenNipNumberAlreadyExists(){
+        // given
+        NewCompanyDto newCompanyDto = initializeNewCompanyDto();
+        Client client = clientRepository.findById(1L).orElse(null);
+        newCompanyDto.setNip("7991923659");
+        // when
+
+        // then
+        assertThrows(CompanyValidationException.class, () -> companyService.createNewCompany(newCompanyDto,client));
+    }
+
+    @Test
+    void shouldThrowsCompanyValidationExceptionWhenRegonNumberAlreadyExists(){
+        // given
+        NewCompanyDto newCompanyDto = initializeNewCompanyDto();
+        Client client = clientRepository.findById(1L).orElse(null);
+        newCompanyDto.setRegon("637800090");
+        // when
+
+        // then
+        assertThrows(CompanyValidationException.class, () -> companyService.createNewCompany(newCompanyDto,client));
     }
 
 
