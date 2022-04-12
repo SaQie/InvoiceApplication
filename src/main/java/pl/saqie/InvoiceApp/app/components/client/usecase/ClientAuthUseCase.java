@@ -1,17 +1,25 @@
 package pl.saqie.InvoiceApp.app.components.client.usecase;
 
 import lombok.AllArgsConstructor;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import pl.saqie.InvoiceApp.app.components.client.entity.Client;
 import pl.saqie.InvoiceApp.app.components.client.ClientRepository;
-import pl.saqie.InvoiceApp.app.components.client.usecase.register.dto.RegisterClientDto;
+import pl.saqie.InvoiceApp.app.components.client.entity.Client;
+import pl.saqie.InvoiceApp.app.components.client.entity.Role;
 import pl.saqie.InvoiceApp.app.components.client.mapper.ClientMapper;
+import pl.saqie.InvoiceApp.app.components.client.usecase.register.dto.RegisterClientDto;
 import pl.saqie.InvoiceApp.app.components.client.usecase.register.validator.RegisterValidator;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
@@ -31,6 +39,15 @@ public class ClientAuthUseCase implements UserDetailsService {
         validateClientFields(clientDto);
         Client client = mapFromDtoToEntity(clientDto);
         return saveClient(client);
+    }
+
+    public void reloadRole(){
+        Authentication oldAuthentication = SecurityContextHolder.getContext().getAuthentication();
+        Set<GrantedAuthority> newRoles = new HashSet<>(oldAuthentication.getAuthorities());
+        newRoles.add(new SimpleGrantedAuthority(Role.CLIENT.toString()));
+        Authentication newAuth = new UsernamePasswordAuthenticationToken(oldAuthentication.getPrincipal(),
+                oldAuthentication.getCredentials(), newRoles);
+        SecurityContextHolder.getContext().setAuthentication(newAuth);
     }
 
     private void validateClientFields(RegisterClientDto clientDto) {

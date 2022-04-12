@@ -16,4 +16,10 @@ public class ClientService {
         return clientAuthUseCase.registerClient(clientDto);
     }
 
+    public void reloadUserRole(){
+        clientAuthUseCase.reloadRole();
+    }
+
+
+
 }
