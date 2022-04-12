@@ -40,6 +40,7 @@ public class NewCompanyController {
     public String postNewCompanyForm(@ModelAttribute @Valid NewCompanyDto companyDto, BindingResult bindingResult, @AuthenticationPrincipal Client client, Model model){
         if (!bindingResult.hasErrors()){
             companyService.createNewCompany(companyDto, client);
+            companyService.reloadClientRole(client);
             model.addAttribute("addedSuccessfully", "Pomyslnie dodano nowa firme do konta.");
         }
         return "add-company";

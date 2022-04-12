@@ -16,11 +16,13 @@ public class CompanyService {
     private final ClientService clientService;
 
     public Company createNewCompany(NewCompanyDto companyDto, Client client){
-        Company company = newCompanyUseCase.createNewCompany(companyDto, client);
-        if (client.getNumberOfCompanies() == 1){
+        return newCompanyUseCase.createNewCompany(companyDto, client);
+    }
+
+    public void reloadClientRole(Client client){
+        if (client.getNumberOfCompanies() == 1) {
             clientService.reloadUserRole();
         }
-        return company;
     }
 
 }

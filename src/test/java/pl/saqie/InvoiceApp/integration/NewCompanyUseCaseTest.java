@@ -8,7 +8,9 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import pl.saqie.InvoiceApp.app.components.client.ClientRepository;
+import pl.saqie.InvoiceApp.app.components.client.ClientService;
 import pl.saqie.InvoiceApp.app.components.client.entity.Client;
+import pl.saqie.InvoiceApp.app.components.client.usecase.register.dto.RegisterClientDto;
 import pl.saqie.InvoiceApp.app.components.company.CompanyService;
 import pl.saqie.InvoiceApp.app.components.company.entity.Company;
 import pl.saqie.InvoiceApp.app.components.company.usecase.newcompany.dto.NewCompanyDto;
@@ -25,13 +27,15 @@ class NewCompanyUseCaseTest {
     private final JdbcTemplate jdbcTemplate;
     private final CompanyService companyService;
     private final ClientRepository clientRepository;
+    private final ClientService clientService;
 
     @Autowired
-    public NewCompanyUseCaseTest(DataSource dataSource, JdbcTemplate jdbcTemplate, CompanyService companyService, ClientRepository clientRepository) {
+    public NewCompanyUseCaseTest(DataSource dataSource, JdbcTemplate jdbcTemplate, CompanyService companyService, ClientRepository clientRepository, ClientService clientService) {
         this.dataSource = dataSource;
         this.jdbcTemplate = jdbcTemplate;
         this.companyService = companyService;
         this.clientRepository = clientRepository;
+        this.clientService = clientService;
     }
 
     @BeforeEach
