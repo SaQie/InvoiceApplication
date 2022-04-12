@@ -34,13 +34,20 @@ public class Client implements UserDetails {
     private String password;
 
     private LocalDate createdDate;
-    private int numberOfCompanies;
 
     @Enumerated(value = EnumType.STRING)
     private Role role;
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Company> companies;
+
+    public void setCompanies(Set<Company> companies) {
+        this.companies = companies;
+    }
+
+    public int getNumberOfCompanies() {
+        return companies.size();
+    }
 
     public void setPassword(String password) {
         this.password = password;
@@ -48,10 +55,6 @@ public class Client implements UserDetails {
 
     public void setRole(Role role) {
         this.role = role;
-    }
-
-    public void setNumberOfCompanies(int numberOfCompanies) {
-        this.numberOfCompanies = numberOfCompanies;
     }
 
     @Override

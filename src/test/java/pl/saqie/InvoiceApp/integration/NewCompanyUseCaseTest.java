@@ -63,13 +63,22 @@ class NewCompanyUseCaseTest {
                 .regon("791795202").build();
     }
 
+    private Client initializeNewClient(){
+        RegisterClientDto dto = RegisterClientDto.builder()
+                .username("username")
+                .password("password")
+                .passwordRepeat("password")
+                .email("example@example.com").build();
+        return clientService.register(dto);
+    }
+
     @Test
     void shouldReturnNewCompanyInstance(){
         // given
         NewCompanyDto newCompanyDto = initializeNewCompanyDto();
         Client client = clientRepository.findById(1L).orElse(null);
         // when
-        Company newCompany = companyService.createNewCompany(newCompanyDto,client);
+        Company newCompany = companyService.createNewCompany(newCompanyDto,client.getId());
         // then
         assertAll(
                 () -> assertNotNull(newCompany),
@@ -81,9 +90,9 @@ class NewCompanyUseCaseTest {
     void shouldReturnNewCompanyWithGivenFields(){
         // given
         NewCompanyDto newCompanyDto = initializeNewCompanyDto();
-        Client client = clientRepository.findById(1L).orElse(null);
+        Client client = initializeNewClient();
         // when
-        Company newCompany = companyService.createNewCompany(newCompanyDto, client);
+        Company newCompany = companyService.createNewCompany(newCompanyDto, client.getId());
         // then
         assertAll(
                 () -> assertNotNull(client),
@@ -103,7 +112,7 @@ class NewCompanyUseCaseTest {
         NewCompanyDto newCompanyDto = initializeNewCompanyDto();
         Client client = clientRepository.findById(1L).orElse(null);
         // when
-        companyService.createNewCompany(newCompanyDto, client);
+        companyService.createNewCompany(newCompanyDto, client.getId());
         // then
         assertNotNull(client);
         assertEquals(1,client.getNumberOfCompanies());
@@ -118,7 +127,7 @@ class NewCompanyUseCaseTest {
         // when
 
         // then
-        assertThrows(CompanyValidationException.class, () -> companyService.createNewCompany(newCompanyDto,client));
+        assertThrows(CompanyValidationException.class, () -> companyService.createNewCompany(newCompanyDto,client.getId()));
     }
 
     @Test
@@ -130,7 +139,7 @@ class NewCompanyUseCaseTest {
         // when
 
         // then
-        assertThrows(CompanyValidationException.class, () -> companyService.createNewCompany(newCompanyDto,client));
+        assertThrows(CompanyValidationException.class, () -> companyService.createNewCompany(newCompanyDto,client.getId()));
     }
 
     @Test
@@ -142,7 +151,7 @@ class NewCompanyUseCaseTest {
         // when
 
         // then
-        assertThrows(CompanyValidationException.class, () -> companyService.createNewCompany(newCompanyDto,client));
+        assertThrows(CompanyValidationException.class, () -> companyService.createNewCompany(newCompanyDto,client.getId()));
     }
 
     @Test
@@ -154,7 +163,7 @@ class NewCompanyUseCaseTest {
         // when
 
         // then
-        assertThrows(CompanyValidationException.class, () -> companyService.createNewCompany(newCompanyDto,client));
+        assertThrows(CompanyValidationException.class, () -> companyService.createNewCompany(newCompanyDto,client.getId()));
     }
 
     @Test
@@ -166,7 +175,7 @@ class NewCompanyUseCaseTest {
         // when
 
         // then
-        assertThrows(CompanyValidationException.class, () -> companyService.createNewCompany(newCompanyDto,client));
+        assertThrows(CompanyValidationException.class, () -> companyService.createNewCompany(newCompanyDto,client.getId()));
     }
 
 

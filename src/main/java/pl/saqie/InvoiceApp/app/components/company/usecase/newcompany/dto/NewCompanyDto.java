@@ -34,4 +34,6 @@ public class NewCompanyDto {
     @Size(min = 2, message = "Pole musi zawierać co najmniej 2 znaki.")
     private String ownerLastName;
 
+    private Long clientId;
+
 }

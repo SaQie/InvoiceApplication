@@ -13,16 +13,11 @@ import pl.saqie.InvoiceApp.app.components.company.usecase.newcompany.dto.NewComp
 public class CompanyService {
 
     private final NewCompanyUseCase newCompanyUseCase;
-    private final ClientService clientService;
 
-    public Company createNewCompany(NewCompanyDto companyDto, Client client){
-        return newCompanyUseCase.createNewCompany(companyDto, client);
+    public Company createNewCompany(NewCompanyDto companyDto, Long clientId){
+        return newCompanyUseCase.createNewCompany(companyDto, clientId);
     }
 
-    public void reloadClientRole(Client client){
-        if (client.getNumberOfCompanies() == 1) {
-            clientService.reloadUserRole();
-        }
-    }
+
 
 }

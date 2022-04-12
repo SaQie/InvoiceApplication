@@ -39,8 +39,7 @@ public class NewCompanyController {
     @PostMapping("/add/company")
     public String postNewCompanyForm(@ModelAttribute @Valid NewCompanyDto companyDto, BindingResult bindingResult, @AuthenticationPrincipal Client client, Model model){
         if (!bindingResult.hasErrors()){
-            companyService.createNewCompany(companyDto, client);
-            companyService.reloadClientRole(client);
+            companyService.createNewCompany(companyDto, client.getId());
             model.addAttribute("addedSuccessfully", "Pomyslnie dodano nowa firme do konta.");
         }
         return "add-company";

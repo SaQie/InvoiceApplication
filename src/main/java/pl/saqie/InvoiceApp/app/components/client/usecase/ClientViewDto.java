@@ -15,6 +15,5 @@ public class ClientViewDto {
     private String username;
     private String email;
     private LocalDate createdDate;
-    private int numberOfCompanies;
     private Role role;
 }
