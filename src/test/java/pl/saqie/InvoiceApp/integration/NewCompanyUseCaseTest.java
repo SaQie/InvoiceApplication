@@ -7,14 +7,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
-import pl.saqie.InvoiceApp.app.components.client.ClientRepository;
-import pl.saqie.InvoiceApp.app.components.client.ClientService;
-import pl.saqie.InvoiceApp.app.components.client.entity.Client;
-import pl.saqie.InvoiceApp.app.components.client.usecase.register.dto.RegisterClientDto;
-import pl.saqie.InvoiceApp.app.components.company.CompanyService;
-import pl.saqie.InvoiceApp.app.components.company.entity.Company;
-import pl.saqie.InvoiceApp.app.components.company.usecase.newcompany.dto.NewCompanyDto;
-import pl.saqie.InvoiceApp.app.components.company.usecase.newcompany.validator.exception.CompanyValidationException;
+import pl.saqie.InvoiceApp.app.client.service.ClientAuthService;
+import pl.saqie.InvoiceApp.app.client.repository.ClientRepository;
+import pl.saqie.InvoiceApp.app.client.Client;
+import pl.saqie.InvoiceApp.app.client.dto.RegisterClientDto;
+import pl.saqie.InvoiceApp.app.company.service.CompanyService;
+import pl.saqie.InvoiceApp.app.company.Company;
+import pl.saqie.InvoiceApp.app.company.dto.NewCompanyDto;
+import pl.saqie.InvoiceApp.app.company.service.validator.exception.CompanyValidationException;
 
 import javax.sql.DataSource;
 
@@ -27,10 +27,10 @@ class NewCompanyUseCaseTest {
     private final JdbcTemplate jdbcTemplate;
     private final CompanyService companyService;
     private final ClientRepository clientRepository;
-    private final ClientService clientService;
+    private final ClientAuthService clientService;
 
     @Autowired
-    public NewCompanyUseCaseTest(DataSource dataSource, JdbcTemplate jdbcTemplate, CompanyService companyService, ClientRepository clientRepository, ClientService clientService) {
+    public NewCompanyUseCaseTest(DataSource dataSource, JdbcTemplate jdbcTemplate, CompanyService companyService, ClientRepository clientRepository, ClientAuthService clientService) {
         this.dataSource = dataSource;
         this.jdbcTemplate = jdbcTemplate;
         this.companyService = companyService;
@@ -69,7 +69,7 @@ class NewCompanyUseCaseTest {
                 .password("password")
                 .passwordRepeat("password")
                 .email("example@example.com").build();
-        return clientService.register(dto);
+        return clientService.registerNewClient(dto);
     }
 
     @Test
