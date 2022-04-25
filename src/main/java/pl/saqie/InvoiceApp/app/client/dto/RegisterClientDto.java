@@ -1,6 +1,8 @@
 package pl.saqie.InvoiceApp.app.client.dto;
 
 import lombok.*;
+import pl.saqie.InvoiceApp.app.client.service.validator.ClientExists;
+import pl.saqie.InvoiceApp.app.client.service.validator.PasswordValid;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -13,6 +15,8 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @ToString
 @AllArgsConstructor
+@PasswordValid(message = "Hasla musza byc zgodne !")
+@ClientExists(message = "Taki klient juz istnieje !")
 public class RegisterClientDto {
 
     @Size(min = 3, max = 15, message = "Nazwa musi skladac sie od 3 do 15 znakow.")

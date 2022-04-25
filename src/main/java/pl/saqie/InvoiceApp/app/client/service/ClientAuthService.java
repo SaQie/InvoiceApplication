@@ -9,7 +9,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import pl.saqie.InvoiceApp.app.client.service.validator.AuthValidator;
 import pl.saqie.InvoiceApp.app.client.repository.ClientRepository;
 import pl.saqie.InvoiceApp.app.client.Client;
 import pl.saqie.InvoiceApp.app.client.Role;
@@ -26,12 +25,10 @@ public class ClientAuthService {
     private static final Logger LOGGER = LoggerFactory.getLogger(ClientAuthService.class);
     private final ClientRepository clientRepository;
     private final ClientMapper clientMapper;
-    private final AuthValidator validator;
 
 
     public Client registerNewClient(RegisterClientDto clientDto){
         LOGGER.info("Add new user to database ( " + clientDto + " )");
-        validator.validateClientFields(clientDto);
         var client = clientMapper.mapDtoToEntity(clientDto);
         return clientRepository.save(client);
     }

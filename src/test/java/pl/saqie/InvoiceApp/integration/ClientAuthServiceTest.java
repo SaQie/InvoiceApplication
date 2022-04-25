@@ -20,6 +20,10 @@ import pl.saqie.InvoiceApp.app.client.exception.ClientExistsException;
 import pl.saqie.InvoiceApp.app.client.exception.MissmatchPasswordException;
 
 import javax.sql.DataSource;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
+
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -32,14 +36,16 @@ public class ClientAuthServiceTest {
     private final JdbcTemplate jdbcTemplate;
     private final MockMvc mockMvc;
     private final ClientAuthService clientAuthService;
+    private final Validator validator;
 
 
     @Autowired
-    public ClientAuthServiceTest(DataSource dataSource, JdbcTemplate jdbcTemplate, MockMvc mockMvc, ClientAuthService clientAuthService) {
+    public ClientAuthServiceTest(DataSource dataSource, JdbcTemplate jdbcTemplate, MockMvc mockMvc, ClientAuthService clientAuthService, Validator validator) {
         this.dataSource = dataSource;
         this.jdbcTemplate = jdbcTemplate;
         this.mockMvc = mockMvc;
         this.clientAuthService = clientAuthService;
+        this.validator = validator;
     }
 
 
@@ -105,29 +111,28 @@ public class ClientAuthServiceTest {
     }
 
     @Test
-    void shouldThrowsMissmatchPasswordExceptionWhenPasswordDoNotMatch(){
+    void shouldValidatePasswordRepeatCorrect(){
         // given
         RegisterClientDto request = createRequest();
         request.setPasswordRepeat("test");
         // when
-
+        Set<ConstraintViolation<RegisterClientDto>> violations = validator.validate(request);
         // then
-        assertThrows(MissmatchPasswordException.class,
-                () -> clientAuthService.registerNewClient(request));
+        assertEquals(1, violations.size());
     }
 
     @Test
-    void shouldThrowsClientExistsExceptionWhenUsernameOrEmailAlreadyExists(){
+    void shouldValidateClientAlreadyExists(){
         // given
         RegisterClientDto request = createRequest();
         RegisterClientDto request1 = createRequest();
         clientAuthService.registerNewClient(request1);
         // when
-
+        Set<ConstraintViolation<RegisterClientDto>> violations = validator.validate(request);
         // then
-        assertThrows(ClientExistsException.class,
-                () -> clientAuthService.registerNewClient(request));
+        assertEquals(1,violations.size());
     }
+
 
     @Test
     @WithUserDetails(value = "Kamil")
