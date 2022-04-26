@@ -1,4 +1,4 @@
-package pl.saqie.InvoiceApp.app.company.service.validator.exception;
+package pl.saqie.InvoiceApp.app.company.exception;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;

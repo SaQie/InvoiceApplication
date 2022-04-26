@@ -10,9 +10,7 @@ import pl.saqie.InvoiceApp.app.client.Role;
 import pl.saqie.InvoiceApp.app.company.Company;
 import pl.saqie.InvoiceApp.app.company.mapper.CompanyMapper;
 import pl.saqie.InvoiceApp.app.company.dto.NewCompanyDto;
-import pl.saqie.InvoiceApp.app.company.service.validator.NewCompanyValidator;
 
-import java.util.List;
 import java.util.Set;
 
 @Service
@@ -20,22 +18,15 @@ import java.util.Set;
 @AllArgsConstructor
 public class NewCompanyUseCase {
 
-    private final List<NewCompanyValidator> validator;
     private final ClientRepository clientRepository;
     private final ClientAuthService clientService;
     private final CompanyMapper companyMapper;
 
     public Company createNewCompany(NewCompanyDto newCompanyDto, Long clientId) {
-        validCompanyFields(newCompanyDto);
         Client client = clientRepository.getById(clientId);
         return assignClientToCompany(mapFromDtoToEntity(newCompanyDto), client);
     }
 
-    private void validCompanyFields(NewCompanyDto newCompanyDto) {
-        for (NewCompanyValidator newCompanyValidator : validator) {
-            newCompanyValidator.check(newCompanyDto);
-        }
-    }
 
     private Company mapFromDtoToEntity(NewCompanyDto newCompanyDto) {
         return companyMapper.mapFromNewCompanyDtoToEntity(newCompanyDto);

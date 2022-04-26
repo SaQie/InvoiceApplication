@@ -3,6 +3,8 @@ package pl.saqie.InvoiceApp.app.company.dto;
 import lombok.*;
 import org.hibernate.validator.constraints.pl.NIP;
 import org.hibernate.validator.constraints.pl.REGON;
+import pl.saqie.InvoiceApp.app.company.service.validator.CompanyExists;
+import pl.saqie.InvoiceApp.app.company.service.validator.PhoneValid;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -13,6 +15,7 @@ import javax.validation.constraints.Size;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@CompanyExists(message = "Taka firma juz istnieje.")
 public class NewCompanyDto {
 
     @Size(min = 3,message = "Nazwa firmy musi zawierac co najmniej 3 znaki")
@@ -20,8 +23,7 @@ public class NewCompanyDto {
     @NotEmpty(message = "Pole nie moze pozostac puste")
     @NotBlank(message = "Pole nie moze zawierac bialych znakow")
     private String adress;
-    @Size(min = 9, max = 9, message = "Podaj poprawny numer telefonu")
-    @NotBlank(message = "Pole nie moze zawierac bialych znakow")
+    @PhoneValid(message = "Wprowadz poprawny numer telefonu.")
     private String telephoneNumber;
     @NIP(message = "Wprowadz poprawny numer NIP")
     private String nip;

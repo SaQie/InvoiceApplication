@@ -14,9 +14,13 @@ import pl.saqie.InvoiceApp.app.client.dto.RegisterClientDto;
 import pl.saqie.InvoiceApp.app.company.service.CompanyService;
 import pl.saqie.InvoiceApp.app.company.Company;
 import pl.saqie.InvoiceApp.app.company.dto.NewCompanyDto;
-import pl.saqie.InvoiceApp.app.company.service.validator.exception.CompanyValidationException;
+import pl.saqie.InvoiceApp.app.company.exception.CompanyValidationException;
 
 import javax.sql.DataSource;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
+
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,14 +32,16 @@ class NewCompanyUseCaseTest {
     private final CompanyService companyService;
     private final ClientRepository clientRepository;
     private final ClientAuthService clientService;
+    private final Validator validator;
 
     @Autowired
-    public NewCompanyUseCaseTest(DataSource dataSource, JdbcTemplate jdbcTemplate, CompanyService companyService, ClientRepository clientRepository, ClientAuthService clientService) {
+    public NewCompanyUseCaseTest(DataSource dataSource, JdbcTemplate jdbcTemplate, CompanyService companyService, ClientRepository clientRepository, ClientAuthService clientService, Validator validator) {
         this.dataSource = dataSource;
         this.jdbcTemplate = jdbcTemplate;
         this.companyService = companyService;
         this.clientRepository = clientRepository;
         this.clientService = clientService;
+        this.validator = validator;
     }
 
     @BeforeEach
@@ -119,64 +125,61 @@ class NewCompanyUseCaseTest {
     }
 
     @Test
-    void shouldThrowsCompanyValidationExceptionWhenTelephoneNumberIsIncorrect(){
+    void shouldValidatePhoneNumberIsCorrect(){
         // given
         NewCompanyDto newCompanyDto = initializeNewCompanyDto();
-        Client client = clientRepository.findById(1L).orElse(null);
-        newCompanyDto.setTelephoneNumber("123123");
+        newCompanyDto.setTelephoneNumber("a2");
         // when
-
+        Set<ConstraintViolation<String>> violations = validator.validate(newCompanyDto.getTelephoneNumber());
         // then
-        assertThrows(CompanyValidationException.class, () -> companyService.createNewCompany(newCompanyDto,client.getId()));
+        assertEquals(1,violations.size());
     }
 
     @Test
-    void shouldThrowsCompanyValidationExceptionWhenCompanyNameAlreadyExists(){
+    void shouldValidateCompanyAlreadyExistsWithGivenName(){
         // given
         NewCompanyDto newCompanyDto = initializeNewCompanyDto();
-        Client client = clientRepository.findById(1L).orElse(null);
         newCompanyDto.setName("Oponeo S.A");
         // when
-
+        Set<ConstraintViolation<NewCompanyDto>> violations = validator.validate(newCompanyDto);
         // then
-        assertThrows(CompanyValidationException.class, () -> companyService.createNewCompany(newCompanyDto,client.getId()));
+        assertEquals(1,violations.size());
     }
 
     @Test
-    void shouldThrowsCompanyValidationExceptionWhenCompanyAdressAlreadyExists(){
+    void shouldValidateCompanyAlreadyExistsWithGivenNipNumber(){
         // given
         NewCompanyDto newCompanyDto = initializeNewCompanyDto();
-        Client client = clientRepository.findById(1L).orElse(null);
-        newCompanyDto.setAdress("Powstancow 2/4");
+        newCompanyDto.setNip("3411390381");
         // when
-
+        Set<ConstraintViolation<NewCompanyDto>> violations = validator.validate(newCompanyDto);
         // then
-        assertThrows(CompanyValidationException.class, () -> companyService.createNewCompany(newCompanyDto,client.getId()));
+        assertEquals(1,violations.size());
     }
 
     @Test
-    void shouldThrowsCompanyValidationExceptionWhenNipNumberAlreadyExists(){
+    void shouldValidateCompanyAlreadyExistsWithGivenRegonNumber(){
         // given
         NewCompanyDto newCompanyDto = initializeNewCompanyDto();
-        Client client = clientRepository.findById(1L).orElse(null);
-        newCompanyDto.setNip("7991923659");
+        newCompanyDto.setRegon("015730899");
         // when
-
+        Set<ConstraintViolation<NewCompanyDto>> violations = validator.validate(newCompanyDto);
         // then
-        assertThrows(CompanyValidationException.class, () -> companyService.createNewCompany(newCompanyDto,client.getId()));
+        assertEquals(1,violations.size());
     }
 
     @Test
-    void shouldThrowsCompanyValidationExceptionWhenRegonNumberAlreadyExists(){
+    void shouldValidateCompanyAlreadyExistsWithGivenCompanyAdress(){
         // given
         NewCompanyDto newCompanyDto = initializeNewCompanyDto();
-        Client client = clientRepository.findById(1L).orElse(null);
-        newCompanyDto.setRegon("637800090");
+        newCompanyDto.setAdress("Komornika 2/2");
         // when
-
+        Set<ConstraintViolation<NewCompanyDto>> violations = validator.validate(newCompanyDto);
         // then
-        assertThrows(CompanyValidationException.class, () -> companyService.createNewCompany(newCompanyDto,client.getId()));
+        assertEquals(1,violations.size());
     }
+
+
 
 
 }

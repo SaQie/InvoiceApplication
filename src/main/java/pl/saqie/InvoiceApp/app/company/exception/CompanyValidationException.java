@@ -1,4 +1,4 @@
-package pl.saqie.InvoiceApp.app.company.service.validator.exception;
+package pl.saqie.InvoiceApp.app.company.exception;
 
 public class CompanyValidationException extends RuntimeException{
 
