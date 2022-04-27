@@ -1,40 +1,38 @@
 package pl.saqie.InvoiceApp.app.company.service;
 
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import pl.saqie.InvoiceApp.app.client.service.ClientAuthService;
-import pl.saqie.InvoiceApp.app.client.repository.ClientRepository;
 import pl.saqie.InvoiceApp.app.client.Client;
 import pl.saqie.InvoiceApp.app.client.Role;
+import pl.saqie.InvoiceApp.app.client.repository.ClientRepository;
+import pl.saqie.InvoiceApp.app.client.service.ClientAuthService;
 import pl.saqie.InvoiceApp.app.company.Company;
-import pl.saqie.InvoiceApp.app.company.mapper.CompanyMapper;
 import pl.saqie.InvoiceApp.app.company.dto.NewCompanyDto;
+import pl.saqie.InvoiceApp.app.company.mapper.CompanyMapper;
 
 import java.util.Set;
 
 @Service
-@Transactional
 @AllArgsConstructor
-public class NewCompanyUseCase {
+public class CreateCompanyService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(CreateCompanyService.class);
     private final ClientRepository clientRepository;
     private final ClientAuthService clientService;
     private final CompanyMapper companyMapper;
 
-    public Company createNewCompany(NewCompanyDto newCompanyDto, Long clientId) {
+    public Company createNewCompany(NewCompanyDto companyDto, Long clientId){
+        LOGGER.info("Adding new company to database ( " + companyDto + " )");
         Client client = clientRepository.getById(clientId);
-        return assignClientToCompany(mapFromDtoToEntity(newCompanyDto), client);
+        Company companyBeforeAddClient = companyMapper.mapFromNewCompanyDtoToEntity(companyDto);
+        Company companyAfterAddClient = assignClientToCompany(companyBeforeAddClient, client);
+        return companyAfterAddClient;
     }
 
-
-    private Company mapFromDtoToEntity(NewCompanyDto newCompanyDto) {
-        return companyMapper.mapFromNewCompanyDtoToEntity(newCompanyDto);
-    }
-
-
-    private Company assignClientToCompany(Company company, Client entity) {
-        addCompany(entity,company);
+    private Company assignClientToCompany(Company company, Client client) {
+        addCompany(client,company);
         return company;
     }
 

@@ -1,7 +1,6 @@
 package pl.saqie.InvoiceApp.app.company.service.validator;
 
 import lombok.AllArgsConstructor;
-import pl.saqie.InvoiceApp.app.company.Company;
 import pl.saqie.InvoiceApp.app.company.dto.NewCompanyDto;
 import pl.saqie.InvoiceApp.app.company.repository.CompanyRepository;
 

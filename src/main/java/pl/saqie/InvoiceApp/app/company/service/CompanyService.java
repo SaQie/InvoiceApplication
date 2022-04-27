@@ -9,10 +9,10 @@ import pl.saqie.InvoiceApp.app.company.dto.NewCompanyDto;
 @AllArgsConstructor
 public class CompanyService {
 
-    private final NewCompanyUseCase newCompanyUseCase;
+    private final CreateCompanyService companyService;
 
     public Company createNewCompany(NewCompanyDto companyDto, Long clientId){
-        return newCompanyUseCase.createNewCompany(companyDto, clientId);
+        return companyService.createNewCompany(companyDto, clientId);
     }
 
 

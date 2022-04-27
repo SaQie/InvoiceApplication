@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
+import org.springframework.security.test.context.support.WithUserDetails;
 import pl.saqie.InvoiceApp.app.client.service.ClientAuthService;
 import pl.saqie.InvoiceApp.app.client.repository.ClientRepository;
 import pl.saqie.InvoiceApp.app.client.Client;
@@ -17,6 +18,7 @@ import pl.saqie.InvoiceApp.app.company.dto.NewCompanyDto;
 import pl.saqie.InvoiceApp.app.company.exception.CompanyValidationException;
 
 import javax.sql.DataSource;
+import javax.transaction.Transactional;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
@@ -69,20 +71,12 @@ class NewCompanyUseCaseTest {
                 .regon("791795202").build();
     }
 
-    private Client initializeNewClient(){
-        RegisterClientDto dto = RegisterClientDto.builder()
-                .username("username")
-                .password("password")
-                .passwordRepeat("password")
-                .email("example@example.com").build();
-        return clientService.registerNewClient(dto);
-    }
-
     @Test
+    @Transactional
     void shouldReturnNewCompanyInstance(){
         // given
         NewCompanyDto newCompanyDto = initializeNewCompanyDto();
-        Client client = clientRepository.findById(1L).orElse(null);
+        Client client = clientRepository.getById(1L);
         // when
         Company newCompany = companyService.createNewCompany(newCompanyDto,client.getId());
         // then
@@ -93,10 +87,11 @@ class NewCompanyUseCaseTest {
     }
 
     @Test
+    @Transactional
     void shouldReturnNewCompanyWithGivenFields(){
         // given
         NewCompanyDto newCompanyDto = initializeNewCompanyDto();
-        Client client = initializeNewClient();
+        Client client = clientRepository.getById(1L);
         // when
         Company newCompany = companyService.createNewCompany(newCompanyDto, client.getId());
         // then
@@ -113,26 +108,16 @@ class NewCompanyUseCaseTest {
     }
 
     @Test
+    @Transactional
     void shouldIncreaseClientNumberOfCompaniesAfterAddNewCompany(){
         // given
         NewCompanyDto newCompanyDto = initializeNewCompanyDto();
-        Client client = clientRepository.findById(1L).orElse(null);
+        Client client = clientRepository.getById(1L);
         // when
         companyService.createNewCompany(newCompanyDto, client.getId());
         // then
         assertNotNull(client);
-        assertEquals(1,client.getNumberOfCompanies());
-    }
-
-    @Test
-    void shouldValidatePhoneNumberIsCorrect(){
-        // given
-        NewCompanyDto newCompanyDto = initializeNewCompanyDto();
-        newCompanyDto.setTelephoneNumber("a2");
-        // when
-        Set<ConstraintViolation<String>> violations = validator.validate(newCompanyDto.getTelephoneNumber());
-        // then
-        assertEquals(1,violations.size());
+        assertEquals(2,client.getNumberOfCompanies());
     }
 
     @Test

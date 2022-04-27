@@ -18,6 +18,4 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
 
     boolean existsByUsername(String username);
 
-    @Query("select new pl.saqie.InvoiceApp.app.client.dto.ClientViewDto(c.username, c.email, c.createdDate, c.role) from Client c where c.id = :id")
-    Optional<ClientViewDto> searchById(Long id);
 }

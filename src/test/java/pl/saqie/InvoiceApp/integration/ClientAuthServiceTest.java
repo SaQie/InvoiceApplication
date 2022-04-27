@@ -157,7 +157,6 @@ public class ClientAuthServiceTest {
         //then
         mockMvc.perform(MockMvcRequestBuilders.get("/add/company"))
                 .andExpect(status().isUnauthorized());
-
     }
 
 }

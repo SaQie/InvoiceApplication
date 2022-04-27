@@ -23,6 +23,8 @@ public class NewCompanyDto {
     @NotEmpty(message = "Pole nie moze pozostac puste")
     @NotBlank(message = "Pole nie moze zawierac bialych znakow")
     private String adress;
+    @NotBlank(message = "Numer telefonu nie moze byc pusty")
+    @NotEmpty(message = "Numer telefonu nie moze byc pusty")
     @PhoneValid(message = "Wprowadz poprawny numer telefonu.")
     private String telephoneNumber;
     @NIP(message = "Wprowadz poprawny numer NIP")
